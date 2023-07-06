@@ -1,6 +1,6 @@
 ﻿namespace SeguroAgil.Interfaces
 {
-    public interface IClienteDatabaseSettings
+    public interface IClientDatabaseSettings
     {
         public string CollectionName { get; set; }
         public string ConnectionString { get; set; }

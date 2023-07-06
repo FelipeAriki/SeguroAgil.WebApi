@@ -4,11 +4,11 @@ using SeguroAgil.Models;
 
 namespace SeguroAgil.Controllers
 {
-    public class ClienteController : Controller
+    public class ClientController : Controller
     {
         private readonly RepositorioCliente _repository;
 
-        public ClienteController(RepositorioCliente repository)
+        public ClientController(RepositorioCliente repository)
         {
             _repository = repository;
         }
