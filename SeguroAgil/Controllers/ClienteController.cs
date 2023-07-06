@@ -14,13 +14,13 @@ namespace SeguroAgil.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Cliente>> ObterTodos()
+        public ActionResult<List<Client>> ObterTodos()
         {
             return _repository.ObterTodos();
         }
 
         [HttpPost]
-        public ActionResult Inserir(Cliente exemplo)
+        public ActionResult Inserir(Client exemplo)
         {
             _repository.Inserir(exemplo);
             return Ok();
