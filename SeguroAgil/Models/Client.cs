@@ -19,7 +19,7 @@ namespace SeguroAgil.Models
         public string Sobrenome { get; set; } = string.Empty;
 
         [BsonElement("idade")]
-        public Date? Idade { get; set; }
+        public string Idade { get; set; } = string.Empty;
 
         [BsonElement("email")]
         public string Email { get; set; } = string.Empty;
@@ -34,9 +34,6 @@ namespace SeguroAgil.Models
 
         [BsonElement("cep")]
         public string Cep { get; set; } = string.Empty;
-
-        [BsonElement("logradouro")]
-        public string Logradouro { get; set; } = string.Empty;
 
         [BsonElement("complemento")]
         public string Complemento { get; set; } = string.Empty;
