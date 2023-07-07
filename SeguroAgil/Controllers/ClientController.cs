@@ -1,29 +1,87 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SeguroAgil.Dal;
 using SeguroAgil.Models;
+using SeguroAgil.Services;
 
 namespace SeguroAgil.Controllers
 {
-    public class ClientController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ClientController : ControllerBase
     {
-        private readonly RepositorioCliente _repository;
-
-        public ClientController(RepositorioCliente repository)
+        private readonly IClientService clientService;
+        public ClientController(IClientService clientService)
         {
-            _repository = repository;
+            this.clientService = clientService;
         }
 
+        // GET: api/<ClientController>
         [HttpGet]
-        public ActionResult<List<Client>> ObterTodos()
+        public ActionResult<List<Client>> ObterCliente()
         {
-            return _repository.ObterTodos();
+            return clientService.GetClients();
         }
 
-        [HttpPost]
-        public ActionResult Inserir(Client exemplo)
+        // GET api/<ClientController>/5
+        [HttpGet("{id}")]
+        public ActionResult<Client> ObterClientes(string id)
         {
-            _repository.Inserir(exemplo);
-            return Ok();
+            var client = clientService.GetClientById(id);
+            if (client == null)
+                return NotFound($"Cliente com o Id: {id}, não pode ser encontrado!");
+            else
+                return client;
+        }
+
+        // POST api/<ClientController>
+        [HttpPost]
+        public ActionResult<Client> CriarCliente([FromBody] Client client)
+        {
+            clientService.CreateClient(client);
+
+            return CreatedAtAction(nameof(ObterCliente), new { id = client.Id }, client);
+        }
+
+        // PUT api/<ClientController>/5
+        [HttpPut("{id}")]
+        public ActionResult<Client> AlterarCliente(string id, [FromBody] Client client)
+        {
+            var verificaSeClienteExiste = clientService.GetClientById(id);
+            var flagAtualizou = false;
+
+            if (verificaSeClienteExiste == null)
+            {
+                return NotFound($"Cliente com o Id: {id}, não pode ser encontrado!");
+            }
+            else
+            {
+                flagAtualizou = clientService.UpdateClient(id, client);
+                if (flagAtualizou) 
+                    return NoContent();
+                else
+                    return BadRequest("Oops, Cliente não pode ser atualizado! Entrar em contato com o Suporte.");
+
+            }
+        }
+
+        // DELETE api/<ClientController>/5
+        [HttpDelete("{id}")]
+        public ActionResult<Client> RemoverCliente(string id)
+        {
+            var verificaSeClienteExiste = clientService.GetClientById(id);
+            var flagAtualizou = false;
+            if (verificaSeClienteExiste == null)
+            {
+                return NotFound($"Cliente com o Id: {id}, não pode ser encontrado!");
+            }
+            else
+            {
+                flagAtualizou = clientService.DeleteClient(id);
+                if (flagAtualizou)
+                    return Ok($"Cliente com o Id: {id} foi removido com sucesso!");
+                else
+                    return BadRequest("Oops, Cliente não pode ser removido! Entrar em contato com o Suporte.");
+
+            }
         }
     }
 }

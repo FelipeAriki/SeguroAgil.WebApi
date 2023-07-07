@@ -7,7 +7,7 @@ namespace SeguroAgil.Services
         List<Client> GetClients();
         Client GetClientById(string id);
         Client CreateClient(Client client);
-        bool UpdateClient(string id);
+        bool UpdateClient(string id, Client client);
         bool DeleteClient(string id);
     }
 }

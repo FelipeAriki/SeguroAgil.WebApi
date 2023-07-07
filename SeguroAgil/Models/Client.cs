@@ -6,7 +6,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace SeguroAgil.Models
 {
     [BsonIgnoreExtraElements]
-    public class Cliente
+    public class Client
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

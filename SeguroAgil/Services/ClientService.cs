@@ -21,22 +21,38 @@ namespace SeguroAgil.Services
 
         public bool DeleteClient(string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _clients.DeleteOne(cli => cli.Id == id);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public Client GetClientById(string id)
         {
-            throw new NotImplementedException();
+            return _clients.Find(cli => cli.Id == id).FirstOrDefault();
         }
 
         public List<Client> GetClients()
         {
-            throw new NotImplementedException();
+            return _clients.Find(client => true).ToList();
         }
 
-        public bool UpdateClient(string id)
+        public bool UpdateClient(string id, Client client)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _clients.ReplaceOne(cli => cli.Id == id, client);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
