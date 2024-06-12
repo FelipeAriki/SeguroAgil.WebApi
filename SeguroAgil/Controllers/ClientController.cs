@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SeguroAgil.Models;
-using SeguroAgil.Services;
+using SeguroAgil.Domain.Entities;
+using SeguroAgil.Application.Interfaces;
 
 namespace SeguroAgil.Controllers
 {
@@ -8,10 +8,10 @@ namespace SeguroAgil.Controllers
     [ApiController]
     public class ClientController : ControllerBase
     {
-        private readonly IClientService clientService;
+        private readonly IClientService _clientService;
         public ClientController(IClientService clientService)
         {
-            this.clientService = clientService;
+            _clientService = clientService;
         }
 
         // GET: api/<ClientController>

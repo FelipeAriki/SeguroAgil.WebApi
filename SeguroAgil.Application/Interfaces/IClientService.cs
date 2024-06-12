@@ -1,6 +1,6 @@
-﻿using SeguroAgil.Models;
+﻿using SeguroAgil.Domain.Entities;
 
-namespace SeguroAgil.Services
+namespace SeguroAgil.Application.Interfaces
 {
     public interface IClientService
     {
