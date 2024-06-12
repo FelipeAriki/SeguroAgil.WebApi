@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeguroAgil", "SeguroAgil\SeguroAgil.csproj", "{A8C2693A-4B66-48EA-9E3A-CF2E55D7CE3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeguroAgil.WebApi", "SeguroAgil\SeguroAgil.WebApi.csproj", "{A8C2693A-4B66-48EA-9E3A-CF2E55D7CE3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeguroAgil.Application", "SeguroAgil.Application\SeguroAgil.Application.csproj", "{4660884E-5BAB-4524-B941-45241929BAD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeguroAgil.Application", "SeguroAgil.Application\SeguroAgil.Application.csproj", "{4660884E-5BAB-4524-B941-45241929BAD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeguroAgil.Domain", "SeguroAgil.Domain\SeguroAgil.Domain.csproj", "{A4A1A815-91E3-4703-9B49-5E7C7CF2DDF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeguroAgil.Domain", "SeguroAgil.Domain\SeguroAgil.Domain.csproj", "{A4A1A815-91E3-4703-9B49-5E7C7CF2DDF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeguroAgil.Infra.Data", "SeguroAgil.Data\SeguroAgil.Infra.Data.csproj", "{1EDEC79A-1441-4D19-8B85-5C297557BA15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeguroAgil.Infra.Data", "SeguroAgil.Data\SeguroAgil.Infra.Data.csproj", "{1EDEC79A-1441-4D19-8B85-5C297557BA15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeguroAgil.Infra.IoC", "SeguroAgil.Infra.IoC\SeguroAgil.Infra.IoC.csproj", "{AF23F77B-97F1-44F8-B147-D8082897A225}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeguroAgil.Infra.IoC", "SeguroAgil.Infra.IoC\SeguroAgil.Infra.IoC.csproj", "{AF23F77B-97F1-44F8-B147-D8082897A225}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,9 +1,9 @@
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
+using SeguroAgil.Application.Interfaces;
+using SeguroAgil.Application.Services;
 using SeguroAgil.Interfaces;
-using SeguroAgil.Models;
-using SeguroAgil.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

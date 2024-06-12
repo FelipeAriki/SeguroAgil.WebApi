@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SeguroAgil.Domain.Entities;
 using SeguroAgil.Application.Interfaces;
+using SeguroAgil.Domain.Entities;
 
 namespace SeguroAgil.Controllers
 {
@@ -18,14 +18,14 @@ namespace SeguroAgil.Controllers
         [HttpGet]
         public ActionResult<List<Client>> ObterCliente()
         {
-            return clientService.GetClients();
+            return _clientService.GetClients();
         }
 
         // GET api/<ClientController>/5
         [HttpGet("{id}")]
         public ActionResult<Client> ObterClientes(string id)
         {
-            var client = clientService.GetClientById(id);
+            var client = _clientService.GetClientById(id);
             if (client == null)
                 return NotFound($"Cliente com o Id: {id}, não pode ser encontrado!");
             else
@@ -36,7 +36,7 @@ namespace SeguroAgil.Controllers
         [HttpPost]
         public ActionResult<Client> CriarCliente([FromBody] Client client)
         {
-            clientService.CreateClient(client);
+            _clientService.CreateClient(client);
 
             return CreatedAtAction(nameof(ObterCliente), new { id = client.Id }, client);
         }
@@ -45,7 +45,7 @@ namespace SeguroAgil.Controllers
         [HttpPut("{id}")]
         public ActionResult<Client> AlterarCliente(string id, [FromBody] Client client)
         {
-            var verificaSeClienteExiste = clientService.GetClientById(id);
+            var verificaSeClienteExiste = _clientService.GetClientById(id);
             var flagAtualizou = false;
 
             if (verificaSeClienteExiste == null)
@@ -54,7 +54,7 @@ namespace SeguroAgil.Controllers
             }
             else
             {
-                flagAtualizou = clientService.UpdateClient(id, client);
+                flagAtualizou = _clientService.UpdateClient(id, client);
                 if (flagAtualizou) 
                     return NoContent();
                 else
@@ -67,7 +67,7 @@ namespace SeguroAgil.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Client> RemoverCliente(string id)
         {
-            var verificaSeClienteExiste = clientService.GetClientById(id);
+            var verificaSeClienteExiste = _clientService.GetClientById(id);
             var flagAtualizou = false;
             if (verificaSeClienteExiste == null)
             {
@@ -75,7 +75,7 @@ namespace SeguroAgil.Controllers
             }
             else
             {
-                flagAtualizou = clientService.DeleteClient(id);
+                flagAtualizou = _clientService.DeleteClient(id);
                 if (flagAtualizou)
                     return Ok($"Cliente com o Id: {id} foi removido com sucesso!");
                 else
