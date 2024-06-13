@@ -15,71 +15,73 @@ namespace SeguroAgil.Controllers
         }
 
         // GET: api/<ClientController>
-        [HttpGet]
-        public ActionResult<List<Client>> ObterCliente()
+        [HttpGet("GetClients")]
+        public async Task<ActionResult<Client>> GetClients()
         {
-            return _clientService.GetClients();
+            var clients = await _clientService.GetClientsAsync();
+
+            return clients == null ? BadRequest("Clients not found") : Ok(clients);
         }
 
         // GET api/<ClientController>/5
-        [HttpGet("{id}")]
-        public ActionResult<Client> ObterClientes(string id)
+        [HttpGet("GetClient/{id}")]
+        public async Task<ActionResult<Client>> GetClient(string id)
         {
-            var client = _clientService.GetClientById(id);
+            var client = await _clientService.GetClientByIdAsync(id);
             if (client == null)
                 return NotFound($"Cliente com o Id: {id}, não pode ser encontrado!");
             else
-                return client;
+                return Ok(client);
         }
 
         // POST api/<ClientController>
-        [HttpPost]
-        public ActionResult<Client> CriarCliente([FromBody] Client client)
+        [HttpPost("CreateClient")]
+        public async Task<ActionResult<Client>> CreateClient([FromBody] Client client)
         {
-            _clientService.CreateClient(client);
+            await _clientService.CreateClientAsync(client);
 
-            return CreatedAtAction(nameof(ObterCliente), new { id = client.Id }, client);
+            return Ok("Client created!");
         }
 
         // PUT api/<ClientController>/5
-        [HttpPut("{id}")]
-        public ActionResult<Client> AlterarCliente(string id, [FromBody] Client client)
+        [HttpPut("UpdateClient")]
+        public async Task<ActionResult<Client>> UpdateClient([FromBody] Client client)
         {
-            var verificaSeClienteExiste = _clientService.GetClientById(id);
-            var flagAtualizou = false;
+            var searchClient = await _clientService.GetClientByIdAsync(client.Id);
 
-            if (verificaSeClienteExiste == null)
+            if (searchClient == null)
             {
-                return NotFound($"Cliente com o Id: {id}, não pode ser encontrado!");
+                return NotFound($"Cliente with Id: {client.Id}, can`t be found!");
             }
             else
             {
-                flagAtualizou = _clientService.UpdateClient(id, client);
-                if (flagAtualizou) 
-                    return NoContent();
+                var clientUpdated = await _clientService.UpdateClientAsync(client);
+                if (clientUpdated != null) 
+                    return Ok(clientUpdated);
                 else
-                    return BadRequest("Oops, Cliente não pode ser atualizado! Entrar em contato com o Suporte.");
+                    return BadRequest("UpdateClientAsync Failed!");
 
             }
         }
 
         // DELETE api/<ClientController>/5
-        [HttpDelete("{id}")]
-        public ActionResult<Client> RemoverCliente(string id)
+        [HttpDelete("DeleteClient/{id}")]
+        public async Task<ActionResult<bool>> DeleteClient(string id)
         {
-            var verificaSeClienteExiste = _clientService.GetClientById(id);
-            var flagAtualizou = false;
-            if (verificaSeClienteExiste == null)
+            var searchClient = await _clientService.GetClientByIdAsync(id);
+            var flag = false;
+
+            if (searchClient == null)
             {
-                return NotFound($"Cliente com o Id: {id}, não pode ser encontrado!");
+                return NotFound($"Cliente with Id: {id}, can`t be found!");
             }
             else
             {
-                flagAtualizou = _clientService.DeleteClient(id);
-                if (flagAtualizou)
-                    return Ok($"Cliente com o Id: {id} foi removido com sucesso!");
+                flag = await _clientService.DeleteClientAsync(id);
+                if (flag)
+                    return Ok($"Cliente with Id: {id} deleted!");
                 else
-                    return BadRequest("Oops, Cliente não pode ser removido! Entrar em contato com o Suporte.");
+                    return BadRequest("DeleteClientAsync Failed!");
 
             }
         }

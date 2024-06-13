@@ -1,6 +1,6 @@
-﻿using SeguroAgil.Interfaces;
+﻿using SeguroAgil.Domain.Interfaces;
 
-namespace SeguroAgil.Models
+namespace SeguroAgil.Domain.Entities
 {
     public class ClientDatabaseSettings : IClientDatabaseSettings
     {

@@ -1,33 +1,46 @@
 ﻿using SeguroAgil.Application.Interfaces;
 using SeguroAgil.Domain.Entities;
+using SeguroAgil.Domain.Interfaces;
 
 namespace SeguroAgil.Application.Services
 {
     public class ClientService : IClientService
     {
-        public Client CreateClient(Client client)
+        private readonly IClientRepository _clientRepository;
+        public ClientService(IClientRepository clientRepository)
         {
-            throw new NotImplementedException();
+            _clientRepository = clientRepository;
         }
 
-        public bool DeleteClient(string id)
+        public async Task<Client> CreateClientAsync(Client client)
         {
-            throw new NotImplementedException();
+            var clientCreated = await _clientRepository.CreateClientAsync(client);
+            return clientCreated;
         }
 
-        public Client GetClientById(string id)
+        public async Task<bool> DeleteClientAsync(string id)
         {
-            throw new NotImplementedException();
+            var clientRemoved = await _clientRepository.DeleteClientAsync(id);
+            if(clientRemoved)
+                return true;
+            return false;
         }
 
-        public List<Client> GetClients()
+        public async Task<Client> GetClientByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            var client = await _clientRepository.GetClientByIdAsync(id);
+            return client == null ? throw new Exception($"Entity could not be loaded.") : client;
         }
 
-        public bool UpdateClient(string id, Client client)
+        public async Task<IEnumerable<Client>> GetClientsAsync()
         {
-            throw new NotImplementedException();
+            var clients = await _clientRepository.GetClientsAsync();
+            return clients == null ? throw new Exception($"Entity could not be loaded.") : clients;
+        }
+
+        public async Task<Client> UpdateClientAsync(Client client)
+        {
+            return await _clientRepository.UpdateClientAsync(client);
         }
     }
 }

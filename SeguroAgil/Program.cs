@@ -3,7 +3,9 @@ using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 using SeguroAgil.Application.Interfaces;
 using SeguroAgil.Application.Services;
-using SeguroAgil.Interfaces;
+using SeguroAgil.Domain.Entities;
+using SeguroAgil.Domain.Interfaces;
+using SeguroAgil.Infra.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,7 @@ builder.Services.AddSingleton<IClientDatabaseSettings>(sp => sp.GetRequiredServi
 builder.Services.AddSingleton<IMongoClient>(s => new MongoClient(builder.Configuration.GetValue<string>("ClientDatabaseSettings:ConnectionString")));
 
 builder.Services.AddScoped<IClientService, ClientService>();
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
 
 builder.Services.AddControllers();
 

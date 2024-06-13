@@ -1,8 +1,13 @@
 ﻿using SeguroAgil.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace SeguroAgil.Application.Interfaces
+namespace SeguroAgil.Domain.Interfaces
 {
-    public interface IClientService
+    public interface IClientRepository
     {
         Task<IEnumerable<Client>> GetClientsAsync();
         Task<Client> GetClientByIdAsync(string id);
